@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+}
+
+.container {
+    height: 100%;
+    float: left;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    font-size: 5em;
+}
+
+.start {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+.red {
+    height: 100%;
+    background-color: red;
+}
+
+.green {
+    height: 100%;
+    background-color: green;
+}
+
+.refactor {
+    height: 100%;
+    background-color: saddlebrown;
+}

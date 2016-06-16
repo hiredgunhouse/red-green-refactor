@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="classic.css">
+    </head>
+    <body>
+        <div class="container start">
+            <div class="title">Click to start</div>
+        </div>
+        <script type="text/javascript">
+            console.log('test');
+            $(function () {
+                function App($root) {
+                    var that = this;
+                    
+                    that.$root = $root;
+                    this.currentStage = -1;
+                    var STAGES = [
+                        { title: 'RED', cssClass: 'red'},
+                        { title: 'GREEN', cssClass: 'green'},
+                        { title: 'REFACTOR', cssClass: 'refactor'}
+                    ];
+
+                    this.next = function() {
+                        that.currentStage = ++that.currentStage % 3;
+                        stage = STAGES[that.currentStage];
+
+                        that.$root.removeClass();
+                        that.$root.addClass('container ' + stage.cssClass);
+                        that.$root.find('.title').text(stage.title);
+                    };
+                    
+                    this.start = function() {
+                        that.$root.click(that.next);
+                    };
+                    
+                    return {
+                        start: that.start
+                    };
+                }
+
+                var app = new App($('.container'));
+                app.start();
+            });            
+        </script>
+    </body>
+</html>

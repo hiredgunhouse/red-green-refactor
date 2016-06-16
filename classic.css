@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+}
+
+.container {
+    height: 100%;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    font-size: 5em;
+}
+
+.start {
+    background-color: black;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.refactor {
+    background-color: saddlebrown;
+}

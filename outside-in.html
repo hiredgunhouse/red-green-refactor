@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="outside-in.css">
+    </head>
+    <body>
+        <div class="container start">
+            <div class="title">Click to start</div>
+        </div>
+        <script type="text/javascript">
+            console.log('test');
+            $(function () {
+                function App($root) {
+                    var that = this;
+                    
+                    that.$root = $root;
+                    this.currentStage = -1;
+                    var STAGES = [
+                        { title: 'RED', cssClass: 'red'},
+                        { title: 'GREEN', cssClass: 'green'},
+                        { title: 'REFACTOR', cssClass: 'refactor'}
+                    ];
+
+                    this.next = function() {
+                        that.currentStage = ++that.currentStage % 3;
+                        stage = STAGES[that.currentStage];
+
+                        if (stage.title === 'GREEN') {
+                            that.createInnerLoop();
+                            that.updateContainersWidth();
+                        } else {
+                            that.removeInnerLoops();
+                            that.updateContainersWidth();
+                        };
+                        
+                        that.updateCurrentContainerLook(stage);
+                    };
+                    
+                    this.createInnerLoop = function() {
+                        // create new container for inner loop
+                        var $inner = $(
+                            '<div class="container start">' + 
+                            '    <div class="title">Click to start</div>' +
+                            '</div>');
+                        that.$root.after($inner);
+                        
+                        var app = new App($inner);
+                        app.start();
+                    };
+                    
+                    this.removeInnerLoops = function() {
+                        var containers = $('.container');
+                        var index = -1;
+                        for (var i = 0; i < containers.length; i++) {
+                            var container = containers[i];
+                            if ($(container).is(that.$root)) {
+                                index = i;
+                                console.log(index);
+                                break;
+                            }
+                        }
+
+                        for (var i = index + 1; i < containers.length; i++) {
+                            var container = containers[i];
+                            $(container).remove();
+                        }
+                    };
+                    
+                    this.updateContainersWidth = function() {
+                        var containers = $('.container');
+                        var percentage = 100 / containers.length;
+                        containers.css('width', percentage + '%');
+                    };
+                    
+                    this.updateCurrentContainerLook = function(stage) {
+                        that.$root.removeClass();
+                        that.$root.addClass('container ' + stage.cssClass);
+                        that.$root.find('.title').text(stage.title);
+                    };
+
+                    this.start = function() {
+                        that.$root.click(that.next);
+                    };
+                    
+                    return {
+                        start: that.start,
+                    };
+                }
+
+                var app = new App($('.container'));
+                app.start();
+            });            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+body {
+    background-color: black;
+    color: white;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+a:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+a:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
